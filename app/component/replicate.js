@@ -10,6 +10,7 @@ export default function Replicate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("submit clicked");
     const response = await fetch("/api/predictions", {
       method: "POST",
       headers: {
