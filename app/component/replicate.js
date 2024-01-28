@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -42,19 +43,22 @@ export default function Replicate() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="space-y-5">
       <h2>Replicate + Next.js</h2>
       <p>
         Dream something with{" "}
         <a href="https://replicate.com/stability-ai/stable-diffusion">SDXL</a>:
       </p>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className="space-x-8" onSubmit={handleSubmit}>
         <input
+          className="border-slate-800 border-2 min-h-[200px] min-w-[500px] p-4"
           type="text"
           name="prompt"
           placeholder="Enter a prompt to display an image"
         />
-        <button type="submit">Go!</button>
+        <button className="border-2 border-slate-700 p-4" type="submit">
+          Go!
+        </button>
       </form>
 
       {error && <div>{error}</div>}
@@ -62,7 +66,7 @@ export default function Replicate() {
       {prediction && (
         <div>
           {prediction.output && (
-            <div className={styles.imageWrapper}>
+            <div className="">
               <Image
                 fill
                 src={prediction.output[prediction.output.length - 1]}
