@@ -52,7 +52,7 @@ export default function Replicate() {
       </p>
       <form className="space-x-8" onSubmit={handleSubmit}>
         <input
-          className="border-slate-800 border-2 min-h-[200px] min-w-[500px] p-4"
+          className="border-slate-800 border-2 min-h-[200px] min-w-[200px] p-4"
           type="text"
           name="prompt"
           placeholder="Enter a prompt to display an image"
