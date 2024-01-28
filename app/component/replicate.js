@@ -51,8 +51,8 @@ export default function Replicate() {
         <a href="https://replicate.com/stability-ai/stable-diffusion">SDXL</a>:
       </p>
       <form className="space-x-8" onSubmit={handleSubmit}>
-        <input
-          className="border-slate-800 border-2 min-h-[200px] min-w-[200px] p-4"
+        <textarea
+          className="border-slate-800 border-2 min-h-[200px] min-w-[500px] p-4 break-words"
           type="text"
           name="prompt"
           placeholder="Enter a prompt to display an image"
