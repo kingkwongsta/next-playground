@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     }),
   });
 
-  console.log(`request: ${req}`);
+  console.log(`<<< making API call...`);
 
   if (response.status !== 201) {
     let error = await response.json();
@@ -28,5 +28,5 @@ export default async function handler(req, res) {
   const prediction = await response.json();
   res.statusCode = 201;
   res.end(JSON.stringify(prediction));
-  console.log(`response: ${res}`);
+  console.log(`<<< response recieved...`);
 }

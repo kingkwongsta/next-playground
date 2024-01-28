@@ -71,8 +71,8 @@ export default function Replicate() {
               <Image
                 src={prediction.output[prediction.output.length - 1]}
                 alt="output"
-                width={500}
-                height={500}
+                width={1000}
+                height={1000}
               />
             </div>
           )}
