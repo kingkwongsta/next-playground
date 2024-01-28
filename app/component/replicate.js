@@ -69,10 +69,10 @@ export default function Replicate() {
           {prediction.output && (
             <div className="">
               <Image
-                fill
                 src={prediction.output[prediction.output.length - 1]}
                 alt="output"
-                sizes="100vw"
+                width={500}
+                height={500}
               />
             </div>
           )}
