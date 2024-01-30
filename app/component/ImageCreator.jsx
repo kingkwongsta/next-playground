@@ -8,39 +8,70 @@ export default function ImageCreator() {
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
 
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  //     console.log("submit clicked");
+  //     const response = await fetch("/api/image", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         prompt: e.target.prompt.value,
+  //       }),
+  //     });
+  //     let prediction = await response.json();
+  //     // if (response.status !== 201) {
+  //     //   setError(prediction.detail);
+  //     //   return;
+  //     // }
+  //     setPrediction(prediction);
+
+  //     // while (
+  //     //   prediction.status !== "succeeded" &&
+  //     //   prediction.status !== "failed"
+  //     // ) {
+  //     //   await sleep(1000);
+  //     //   const response = await fetch("/api/predictions/" + prediction.id);
+  //     //   prediction = await response.json();
+  //     //   if (response.status !== 200) {
+  //     //     setError(prediction.detail);
+  //     //     return;
+  //     //   }
+  //     //   console.log({ prediction });
+  //     //   setPrediction(prediction);
+  //     // }
+  //   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submit clicked");
-    const response = await fetch("/api/image", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: e.target.prompt.value,
-      }),
-    });
-    let prediction = await response.json();
-    // if (response.status !== 201) {
-    //   setError(prediction.detail);
-    //   return;
-    // }
-    setPrediction(prediction);
 
-    // while (
-    //   prediction.status !== "succeeded" &&
-    //   prediction.status !== "failed"
-    // ) {
-    //   await sleep(1000);
-    //   const response = await fetch("/api/predictions/" + prediction.id);
-    //   prediction = await response.json();
-    //   if (response.status !== 200) {
-    //     setError(prediction.detail);
-    //     return;
-    //   }
-    //   console.log({ prediction });
-    //   setPrediction(prediction);
-    // }
+    try {
+      const response = await fetch("/api/image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: e.target.prompt.value,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        setError(errorMessage.error);
+        return;
+      }
+
+      const { images } = await response.json();
+
+      // Assuming there is only one image in the response
+      const imageURL = `data:image/jpeg;base64,${images[0].imageData}`;
+      setPrediction({ imageURL });
+    } catch (error) {
+      console.error(error);
+      setError("Failed to generate image");
+    }
   };
 
   return (
@@ -68,6 +99,17 @@ export default function ImageCreator() {
           GET ME THE DATA
         </button>
       </div>
+
+      {prediction && (
+        <div className="">
+          <Image
+            src={prediction.imageURL}
+            alt="output"
+            width={1000}
+            height={1000}
+          />
+        </div>
+      )}
       {/* {error && <div>{error}</div>}
 
       {prediction && (

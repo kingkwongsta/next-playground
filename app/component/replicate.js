@@ -67,7 +67,7 @@ export default function Replicate() {
       {prediction && (
         <div>
           <button
-            onClick={console.log(prediction)}
+            onClick={() => console.log(prediction)}
             className="border-2 border-sky-800"
           >
             Get Data
