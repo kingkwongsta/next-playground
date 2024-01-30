@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       cfg_scale: 12,
       use_refiner: true,
       high_noise_frac: 0.8,
-      style_preset: "base",
+      style_preset: "anime",
     };
 
     console.log(`... Sending Prompt: ${req.body.prompt}`);
