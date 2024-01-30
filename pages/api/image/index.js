@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
     // Adjust inputs as needed
     const inputs = {
-      prompt: "A photo of a cute cat astronaut in space",
+      prompt: req.body.prompt,
       negative_prompt: "Blurry photo, distortion, low-res, poor quality",
       width: 1024,
       height: 1024,
@@ -19,6 +19,7 @@ export default async function handler(req, res) {
       style_preset: "base",
     };
 
+    console.log(`... Sending Prompt: ${req.body.prompt}`);
     const response = await axios.post(endpointUrl, inputs, {
       headers: {
         "Content-Type": "application/json",

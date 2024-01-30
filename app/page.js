@@ -7,7 +7,7 @@ export default function Home() {
     <section className="py-24">
       <div className="container">
         <ImageCreator />
-        <Replicate />
+        {/* <Replicate /> */}
       </div>
     </section>
   );
