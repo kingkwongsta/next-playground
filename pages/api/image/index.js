@@ -1,10 +1,7 @@
-// pages/api/generate-image.js
-
-import { Client } from "@octoai/client";
+import axios from "axios";
 
 export default async function handler(req, res) {
   try {
-    const client = new Client(process.env.OCTOAI_TOKEN);
     const endpointUrl = "https://image.octoai.run/generate/sdxl";
 
     // Adjust inputs as needed
@@ -22,7 +19,14 @@ export default async function handler(req, res) {
       style_preset: "base",
     };
 
-    const outputs = (await client.infer) < any > (endpointUrl, inputs);
+    const response = await axios.post(endpointUrl, inputs, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OCTOAI_TOKEN}`,
+      },
+    });
+
+    const outputs = response.data;
 
     const images = outputs.images.map((output, i) => {
       const buffer = Buffer.from(output.image_b64, "base64");

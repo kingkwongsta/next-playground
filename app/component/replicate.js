@@ -66,6 +66,16 @@ export default function Replicate() {
 
       {prediction && (
         <div>
+          <button
+            onClick={console.log(prediction)}
+            className="border-2 border-sky-800"
+          >
+            Get Data
+          </button>
+        </div>
+      )}
+      {/* {prediction && (
+        <div>
           {prediction.output && (
             <div className="">
               <Image
@@ -78,7 +88,7 @@ export default function Replicate() {
           )}
           <p>status: {prediction.status}</p>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
