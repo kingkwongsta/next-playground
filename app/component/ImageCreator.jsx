@@ -21,35 +21,31 @@ export default function ImageCreator() {
       }),
     });
     let prediction = await response.json();
-    if (response.status !== 201) {
-      setError(prediction.detail);
-      return;
-    }
+    // if (response.status !== 201) {
+    //   setError(prediction.detail);
+    //   return;
+    // }
     setPrediction(prediction);
 
-    while (
-      prediction.status !== "succeeded" &&
-      prediction.status !== "failed"
-    ) {
-      await sleep(1000);
-      const response = await fetch("/api/predictions/" + prediction.id);
-      prediction = await response.json();
-      if (response.status !== 200) {
-        setError(prediction.detail);
-        return;
-      }
-      console.log({ prediction });
-      setPrediction(prediction);
-    }
+    // while (
+    //   prediction.status !== "succeeded" &&
+    //   prediction.status !== "failed"
+    // ) {
+    //   await sleep(1000);
+    //   const response = await fetch("/api/predictions/" + prediction.id);
+    //   prediction = await response.json();
+    //   if (response.status !== 200) {
+    //     setError(prediction.detail);
+    //     return;
+    //   }
+    //   console.log({ prediction });
+    //   setPrediction(prediction);
+    // }
   };
 
   return (
     <div className="space-y-5">
-      <h2>Replicate + Next.js</h2>
-      <p>
-        Dream something with{" "}
-        <a href="https://replicate.com/stability-ai/stable-diffusion">SDXL</a>:
-      </p>
+      <h2>OctoAI + Next.js</h2>
       <form className="space-x-8" onSubmit={handleSubmit}>
         <textarea
           className="border-slate-800 border-2 min-h-[200px] min-w-[500px] p-4 break-words"
@@ -62,7 +58,17 @@ export default function ImageCreator() {
         </button>
       </form>
 
-      {error && <div>{error}</div>}
+      <div>
+        <h2>Debug</h2>
+        {prediction && <h3>Data Recieved</h3>}
+        <button
+          onClick={() => console.log(prediction)}
+          className="border-2 border-sky-800"
+        >
+          GET ME THE DATA
+        </button>
+      </div>
+      {/* {error && <div>{error}</div>}
 
       {prediction && (
         <div>
@@ -78,7 +84,7 @@ export default function ImageCreator() {
           )}
           <p>status: {prediction.status}</p>
         </div>
-      )}
+      )}*/}
     </div>
   );
 }

@@ -2,12 +2,9 @@
 
 import { Client } from "@octoai/client";
 
-// Replace with your actual OctoAI token
-const OCTOAI_TOKEN = process.env.NEXT_PUBLIC_OCTOAI_TOKEN;
-
 export default async function handler(req, res) {
   try {
-    const client = new Client(OCTOAI_TOKEN);
+    const client = new Client(process.env.OCTOAI_TOKEN);
     const endpointUrl = "https://image.octoai.run/generate/sdxl";
 
     // Adjust inputs as needed
